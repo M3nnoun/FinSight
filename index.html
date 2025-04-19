@@ -6,6 +6,7 @@
     <title>FinSight - Votre Co-pilote Financier Intelligent</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
         tailwind.config = {
             theme: {
@@ -32,10 +33,6 @@
         .feature-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 10px 25px -5px rgba(0, 86, 179, 0.2);
-        }
-        .chart-placeholder {
-            background: linear-gradient(45deg, #f1f5f9 25%, #e2e8f0 25%, #e2e8f0 50%, #f1f5f9 50%, #f1f5f9 75%, #e2e8f0 75%, #e2e8f0 100%);
-            background-size: 20px 20px;
         }
     </style>
 </head>
@@ -113,8 +110,8 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="bg-white p-4 rounded-lg shadow-sm h-64 chart-placeholder">
-                                    <!-- Chart placeholder -->
+                                <div class="bg-white p-4 rounded-lg shadow-sm h-64">
+                                    <canvas id="heroChart"></canvas>
                                 </div>
                             </div>
                         </div>
@@ -244,65 +241,40 @@
                         <div class="flex mb-6">
                             <div class="w-1/4 pr-4">
                                 <div class="bg-white p-4 rounded-lg border border-gray-200 h-40">
-                                    <div class="h-4 bg-gray-200 rounded-full mb-3 w-1/2"></div>
-                                    <div class="h-8 bg-primary rounded-full mb-2 w-3/4"></div>
-                                    <div class="h-3 bg-gray-200 rounded-full mb-1 w-full"></div>
-                                    <div class="h-3 bg-gray-200 rounded-full w-2/3"></div>
+                                    <div class="text-sm text-gray-500 mb-1">Chiffre d'affaires</div>
+                                    <div class="text-2xl font-bold text-primary mb-2">€124,850</div>
+                                    <div class="text-xs text-gray-500">+12% vs mois dernier</div>
                                 </div>
                             </div>
                             <div class="w-1/4 px-2">
                                 <div class="bg-white p-4 rounded-lg border border-gray-200 h-40">
-                                    <div class="h-4 bg-gray-200 rounded-full mb-3 w-1/2"></div>
-                                    <div class="h-8 bg-accent rounded-full mb-2 w-1/2"></div>
-                                    <div class="h-3 bg-gray-200 rounded-full mb-1 w-full"></div>
-                                    <div class="h-3 bg-gray-200 rounded-full w-2/3"></div>
+                                    <div class="text-sm text-gray-500 mb-1">Dépenses</div>
+                                    <div class="text-2xl font-bold text-accent mb-2">€78,200</div>
+                                    <div class="text-xs text-gray-500">+8% vs mois dernier</div>
                                 </div>
                             </div>
                             <div class="w-1/4 px-2">
                                 <div class="bg-white p-4 rounded-lg border border-gray-200 h-40">
-                                    <div class="h-4 bg-gray-200 rounded-full mb-3 w-1/2"></div>
-                                    <div class="h-8 bg-success rounded-full mb-2 w-1/4"></div>
-                                    <div class="h-3 bg-gray-200 rounded-full mb-1 w-full"></div>
-                                    <div class="h-3 bg-gray-200 rounded-full w-2/3"></div>
+                                    <div class="text-sm text-gray-500 mb-1">Bénéfice net</div>
+                                    <div class="text-2xl font-bold text-success mb-2">€46,650</div>
+                                    <div class="text-xs text-gray-500">+18% vs mois dernier</div>
                                 </div>
                             </div>
                             <div class="w-1/4 pl-4">
                                 <div class="bg-white p-4 rounded-lg border border-gray-200 h-40">
-                                    <div class="h-4 bg-gray-200 rounded-full mb-3 w-1/2"></div>
-                                    <div class="h-8 bg-alert rounded-full mb-2 w-1/3"></div>
-                                    <div class="h-3 bg-gray-200 rounded-full mb-1 w-full"></div>
-                                    <div class="h-3 bg-gray-200 rounded-full w-2/3"></div>
+                                    <div class="text-sm text-gray-500 mb-1">Alertes</div>
+                                    <div class="text-2xl font-bold text-alert mb-2">3</div>
+                                    <div class="text-xs text-gray-500">Dont 1 critique</div>
                                 </div>
                             </div>
                         </div>
                         <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                            <div class="bg-white p-4 rounded-lg border border-gray-200 h-64 chart-placeholder">
-                                <!-- Chart placeholder -->
+                            <div class="bg-white p-4 rounded-lg border border-gray-200 h-64">
+                                <canvas id="revenueChart"></canvas>
                             </div>
                             <div class="bg-white p-4 rounded-lg border border-gray-200 h-64">
-                                <div class="h-4 bg-gray-200 rounded-full mb-4 w-1/3"></div>
-                                <div class="space-y-3">
-                                    <div class="flex items-center">
-                                        <div class="w-4 h-4 bg-primary rounded-full mr-3"></div>
-                                        <div class="h-3 bg-gray-200 rounded-full w-3/4"></div>
-                                    </div>
-                                    <div class="flex items-center">
-                                        <div class="w-4 h-4 bg-accent rounded-full mr-3"></div>
-                                        <div class="h-3 bg-gray-200 rounded-full w-1/2"></div>
-                                    </div>
-                                    <div class="flex items-center">
-                                        <div class="w-4 h-4 bg-success rounded-full mr-3"></div>
-                                        <div class="h-3 bg-gray-200 rounded-full w-2/3"></div>
-                                    </div>
-                                    <div class="flex items-center">
-                                        <div class="w-4 h-4 bg-alert rounded-full mr-3"></div>
-                                        <div class="h-3 bg-gray-200 rounded-full w-1/4"></div>
-                                    </div>
-                                    <div class="flex items-center">
-                                        <div class="w-4 h-4 bg-gray-400 rounded-full mr-3"></div>
-                                        <div class="h-3 bg-gray-200 rounded-full w-3/5"></div>
-                                    </div>
-                                </div>
+                                <div class="text-lg font-semibold mb-4">Répartition des dépenses</div>
+                                <canvas id="expensesChart"></canvas>
                             </div>
                         </div>
                     </div>
@@ -408,21 +380,23 @@
                             <div class="space-y-4">
                                 <div class="flex items-center">
                                     <i class="fas fa-phone-alt mr-4"></i>
-                                    <span>+33 1 23 45 67 89</span>
+                                    <span>+212 775-341662</span>
                                 </div>
                                 <div class="flex items-center">
                                     <i class="fas fa-envelope mr-4"></i>
-                                    <span>contact@finsight.com</span>
+                                    <span>amennoun@insea.ac.ma</span>
                                 </div>
                                 <div class="flex items-center">
                                     <i class="fas fa-map-marker-alt mr-4"></i>
-                                    <span>15 Rue de la Finance, 75001 Paris</span>
+                                    <span>Institut National de Statistique et d'Économie Appliquée, B.P.: 6217 Rabat-Instituts</span>
                                 </div>
                             </div>
                         </div>
+                        
                         <div class="md:w-1/2 p-12">
                             <h3 class="text-2xl font-bold text-gray-800 mb-6">Demandez une démo</h3>
-                            <form>
+                            <form action="https://formsubmit.co/mennoun.abdelfatah@gmail.com" method="POST" >
+                                <input type="hidden" name="_next" value="https://github.com/M3nnoun/FinSight/thanks.html">
                                 <div class="mb-4">
                                     <label class="block text-gray-700 mb-2" for="name">Nom complet</label>
                                     <input type="text" id="name" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
@@ -503,6 +477,129 @@
         document.querySelector('button.md\\:hidden').addEventListener('click', function() {
             // This would toggle a mobile menu in a real implementation
             alert("Mobile menu would open here in a complete implementation");
+        });
+
+        // Chart.js implementation for mockup data
+        document.addEventListener('DOMContentLoaded', function() {
+            // Hero Chart
+            const heroCtx = document.getElementById('heroChart').getContext('2d');
+            new Chart(heroCtx, {
+                type: 'line',
+                data: {
+                    labels: ['Jan', 'Fév', 'Mar', 'Avr', 'Mai', 'Juin', 'Juil', 'Août', 'Sep', 'Oct', 'Nov', 'Déc'],
+                    datasets: [
+                        {
+                            label: 'Revenu réel',
+                            data: [85000, 88000, 92000, 95000, 98000, 102000, 105000, 108000, 112000, 115000, 118000, 124850],
+                            borderColor: '#0056b3',
+                            backgroundColor: 'rgba(0, 86, 179, 0.1)',
+                            borderWidth: 2,
+                            fill: true,
+                            tension: 0.3
+                        },
+                        {
+                            label: 'Prévision',
+                            data: [null, null, null, null, null, null, null, null, null, null, 118000, 125000, 132000, 138000, 145000],
+                            borderColor: '#00a8ff',
+                            backgroundColor: 'transparent',
+                            borderWidth: 2,
+                            borderDash: [5, 5],
+                            tension: 0.3
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: false,
+                            grid: {
+                                drawBorder: false
+                            }
+                        },
+                        x: {
+                            grid: {
+                                display: false
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Revenue Chart
+            const revenueCtx = document.getElementById('revenueChart').getContext('2d');
+            new Chart(revenueCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['2020', '2021', '2022', '2023 (prévision)'],
+                    datasets: [{
+                        label: 'Chiffre d\'affaires (k€)',
+                        data: [850, 920, 1050, 1240],
+                        backgroundColor: [
+                            'rgba(0, 86, 179, 0.7)',
+                            'rgba(0, 86, 179, 0.7)',
+                            'rgba(0, 86, 179, 0.7)',
+                            'rgba(0, 168, 255, 0.7)'
+                        ],
+                        borderColor: [
+                            'rgba(0, 86, 179, 1)',
+                            'rgba(0, 86, 179, 1)',
+                            'rgba(0, 86, 179, 1)',
+                            'rgba(0, 168, 255, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+
+            // Expenses Chart
+            const expensesCtx = document.getElementById('expensesChart').getContext('2d');
+            new Chart(expensesCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Personnel', 'Fournitures', 'Marketing', 'Logiciels', 'Autres'],
+                    datasets: [{
+                        data: [45, 20, 15, 12, 8],
+                        backgroundColor: [
+                            '#0056b3',
+                            '#00a8ff',
+                            '#2ed573',
+                            '#ff4757',
+                            '#a4b0be'
+                        ],
+                        borderWidth: 0
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'right'
+                        }
+                    }
+                }
+            });
         });
     </script>
 </body>
